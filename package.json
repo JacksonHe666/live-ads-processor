@@ -36,7 +36,7 @@
           ]
         }
       ],
-      "artifactName": "直播投放处理器-windows-${version}.${ext}"
+      "artifactName": "live-ads-processor-windows-v${version}.${ext}"
     },
     "mac": {
       "target": [
@@ -49,7 +49,7 @@
       ],
       "category": "public.app-category.business",
       "identity": null,
-      "artifactName": "直播投放处理器-mac-arm64-${version}.${ext}"
+      "artifactName": "live-ads-processor-mac-arm64-v${version}.${ext}"
     }
   }
 }
