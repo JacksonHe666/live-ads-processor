@@ -47,3 +47,13 @@ GitHub Actions 已配置 Windows 自动构建。上传到 GitHub 后，在 Actio
 ```text
 GITHUB_WINDOWS_EXE.md
 ```
+
+## macOS 桌面版 DMG
+
+GitHub Actions 已配置 macOS 自动构建。在 Actions 里运行 `Build macOS DMG`，即可下载：
+
+```text
+直播投放处理器-mac-版本号.dmg
+```
+
+下载 `.dmg` 后双击打开即可安装/运行。

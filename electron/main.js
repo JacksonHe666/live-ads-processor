@@ -33,7 +33,8 @@ function findFreePort(startPort = 8765) {
 
 function backendPath() {
   if (app.isPackaged) {
-    return path.join(process.resourcesPath, "backend", "直播投放处理器后端.exe");
+    const backendName = process.platform === "win32" ? "直播投放处理器后端.exe" : "直播投放处理器后端";
+    return path.join(process.resourcesPath, "backend", backendName);
   }
   return path.join(__dirname, "..", "web_app.py");
 }
