@@ -47,7 +47,7 @@ jobs:
 
       - name: Smoke test backend exists
         run: |
-          test -f "dist/直播投放处理器后端"
+          test -f "dist/直播投放处理器后端/直播投放处理器后端"
 
       - name: Install Electron dependencies
         run: npm install

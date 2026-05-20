@@ -1,6 +1,6 @@
 # 直播投放处理器
 
-本地网页工具：上传订单分析 CSV，生成三表结构 XLSX。
+本地网页工具/桌面应用：上传订单分析 CSV，生成三表结构 XLSX。
 
 ## 启动
 
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 GitHub Actions 已配置 Windows 自动构建。上传到 GitHub 后，在 Actions 里运行 `Build Windows EXE`，即可下载独立桌面窗口版：
 
 ```text
-直播投放处理器-windows-版本号.exe
+直播投放处理器-windows-2.2.0.exe
 ```
 
 详细步骤见：
@@ -53,7 +53,11 @@ GITHUB_WINDOWS_EXE.md
 GitHub Actions 已配置 macOS 自动构建。在 Actions 里运行 `Build macOS DMG`，即可下载：
 
 ```text
-直播投放处理器-mac-版本号.dmg
+直播投放处理器-mac-arm64-2.2.0.dmg
 ```
 
-下载 `.dmg` 后双击打开即可安装/运行。
+下载 `.dmg` 后双击打开即可安装/运行。这个版本是 Apple Silicon 原生版本，适合 M1/M2/M3/M4 等 M 系列芯片。
+
+## 桌面版启动优化
+
+桌面版后端使用目录式打包，减少每次启动时的解压等待。Windows 和 macOS 构建都会使用同一套优化后的后端结构。

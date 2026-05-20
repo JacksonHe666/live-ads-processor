@@ -1,12 +1,12 @@
 {
   "name": "live-ads-processor",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "直播投放处理器桌面版",
   "main": "electron/main.js",
   "private": true,
   "scripts": {
     "build:win": "electron-builder --win portable --x64",
-    "build:mac": "electron-builder --mac dmg --x64"
+    "build:mac": "electron-builder --mac dmg --arm64"
   },
   "devDependencies": {
     "electron": "^33.4.11",
@@ -23,11 +23,8 @@
     ],
     "extraResources": [
       {
-        "from": "dist",
-        "to": "backend",
-        "filter": [
-          "直播投放处理器后端*"
-        ]
+        "from": "dist/直播投放处理器后端",
+        "to": "backend/直播投放处理器后端"
       }
     ],
     "win": {
@@ -46,13 +43,13 @@
         {
           "target": "dmg",
           "arch": [
-            "x64"
+            "arm64"
           ]
         }
       ],
       "category": "public.app-category.business",
       "identity": null,
-      "artifactName": "直播投放处理器-mac-${version}.${ext}"
+      "artifactName": "直播投放处理器-mac-arm64-${version}.${ext}"
     }
   }
 }

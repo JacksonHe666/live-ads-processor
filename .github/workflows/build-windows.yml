@@ -48,8 +48,8 @@ jobs:
       - name: Smoke test backend exists
         shell: pwsh
         run: |
-          if (!(Test-Path "dist/直播投放处理器后端.exe")) {
-            throw "dist/直播投放处理器后端.exe was not created"
+          if (!(Test-Path "dist/直播投放处理器后端/直播投放处理器后端.exe")) {
+            throw "dist/直播投放处理器后端/直播投放处理器后端.exe was not created"
           }
 
       - name: Install Electron dependencies
