@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>投放数据处理面板</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Live Ads Workbook</p>
+            <h1>投放数据处理面板</h1>
+          </div>
+          <div class="status-cluster">
+            <div class="status-pill" id="statusPill">等待上传</div>
+            <div class="status-pill info-pill" tabindex="0">
+              输出结构
+              <div class="structure-popover">
+                <div><strong>Sheet 1</strong><span>直播投放数据源</span></div>
+                <div><strong>Sheet 2</strong><span>数据汇总</span></div>
+                <div><strong>Sheet 3</strong><span>结算整理表</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="hero">
+          <div class="upload-panel">
+            <div class="upload-grid">
+              <div class="dropzone" id="dropzone">
+                <input id="fileInput" type="file" accept=".csv,text/csv" multiple />
+                <div class="file-icon">CSV</div>
+                <h2>导入订单分析 CSV</h2>
+                <p id="fileHint">拖入一个或多个 CSV，或点击选择文件</p>
+                <button class="secondary-button" id="chooseButton" type="button">选择 CSV</button>
+              </div>
+
+              <div class="dropzone screenshot-zone" id="screenshotZone">
+                <input id="screenshotInput" type="file" accept="image/png,image/jpeg,image/webp" multiple />
+                <div class="file-icon">IMG</div>
+                <h2>导入消耗截图</h2>
+                <p id="screenshotHint">可选，支持选择、拖入或粘贴截图</p>
+                <div class="button-row">
+                  <button class="secondary-button" id="chooseScreenshotButton" type="button">选择截图</button>
+                  <button class="secondary-button" id="pasteScreenshotButton" type="button">粘贴截图</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="paste-panel" id="pastePanel" hidden>
+              <div>
+                <span class="label">粘贴截图</span>
+                <strong>点击下方区域后按 Cmd+V / Ctrl+V</strong>
+              </div>
+              <div class="paste-target" id="pasteTarget" tabindex="0" contenteditable="true" role="textbox" aria-label="粘贴截图区域">
+                在这里粘贴剪切板截图
+              </div>
+            </div>
+
+            <div class="selected-file" id="selectedFile" hidden>
+              <div>
+                <span class="label">当前 CSV</span>
+                <strong id="fileName"></strong>
+              </div>
+              <button class="text-button" id="clearButton" type="button">移除</button>
+            </div>
+
+            <div class="selected-file" id="selectedScreenshots" hidden>
+              <div>
+                <span class="label">当前截图</span>
+                <strong id="screenshotName"></strong>
+              </div>
+              <button class="text-button" id="clearScreenshotButton" type="button">移除</button>
+            </div>
+            <div class="thumb-grid" id="screenshotThumbs" hidden></div>
+
+            <div class="field-row">
+              <label for="outputNameInput">导出文件名</label>
+              <input id="outputNameInput" type="text" placeholder="默认：加热开始时间 + 加热主播 + 直播投放数据" />
+            </div>
+
+            <button class="primary-button" id="processButton" type="button" disabled>
+              生成 XLSX
+            </button>
+          </div>
+        </section>
+
+        <section class="options-panel">
+          <div class="option-item">
+            <div>
+              <strong>数据情况表转置</strong>
+              <span>指标纵向排列，投放目标横向对比</span>
+            </div>
+            <label class="switch">
+              <input id="transposeSummary" type="checkbox" checked />
+              <span></span>
+            </label>
+          </div>
+          <div class="option-item">
+            <div>
+              <strong>使用千分位</strong>
+              <span>例如 32,843、1,228.90</span>
+            </div>
+            <label class="switch">
+              <input id="useThousands" type="checkbox" checked />
+              <span></span>
+            </label>
+          </div>
+          <div class="option-item">
+            <div>
+              <strong>删除全 0 列</strong>
+              <span>分类列没有任何数据时不导出</span>
+            </div>
+            <label class="switch">
+              <input id="removeZeroColumns" type="checkbox" checked />
+              <span></span>
+            </label>
+          </div>
+          <div class="option-item">
+            <div>
+              <strong>交叉高亮</strong>
+              <span>点击单元格定位对应行列</span>
+            </div>
+            <label class="switch">
+              <input id="crossHighlight" type="checkbox" checked />
+              <span></span>
+            </label>
+          </div>
+          <div class="option-item">
+            <div>
+              <strong>占比显示百分数</strong>
+              <span>进入率、新增/场观、评论/场观</span>
+            </div>
+            <label class="switch">
+              <input id="rateMetricsAsPercent" type="checkbox" checked />
+              <span></span>
+            </label>
+          </div>
+          <div class="option-item option-wide">
+            <div>
+              <strong>小数位</strong>
+              <span>比例字段统一输出为小数</span>
+            </div>
+            <div class="segmented" role="group" aria-label="小数位">
+              <label>
+                <input type="radio" name="decimalMode" value="fixed2" checked />
+                <span>保留两位</span>
+              </label>
+              <label>
+                <input type="radio" name="decimalMode" value="full" />
+                <span>展开小数</span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="metrics" id="metrics" hidden>
+          <article>
+            <span>数据行数</span>
+            <strong id="rowsMetric">0</strong>
+          </article>
+          <article>
+            <span>消耗金额</span>
+            <strong id="spendMetric">¥0.00</strong>
+          </article>
+          <article>
+            <span>成交金额</span>
+            <strong id="dealMetric">¥0.00</strong>
+          </article>
+          <article>
+            <span>成交 ROI</span>
+            <strong id="roiMetric">0.00</strong>
+          </article>
+        </section>
+
+        <section class="download-card" id="downloadCard" hidden>
+          <div>
+            <span class="label">已生成</span>
+            <strong id="outputName"></strong>
+          </div>
+          <div class="download-actions">
+            <a class="download-button" id="downloadLink" href="#">下载 XLSX</a>
+            <a class="download-button muted-download" id="imageDownloadLink" href="#" hidden>下载拼接图</a>
+            <button class="download-button muted-download" id="copyImageButton" type="button" hidden>复制拼接图</button>
+          </div>
+        </section>
+
+        <section class="warnings-card" id="warningsCard" hidden>
+          <span class="label">检测提醒</span>
+          <ul id="warningsList"></ul>
+        </section>
+
+        <section class="preview-section" id="previewSection" hidden>
+          <div class="preview-card">
+            <div class="preview-heading">
+              <div>
+                <span class="label">Sheet 2</span>
+                <strong>数据汇总</strong>
+              </div>
+              <div class="preview-actions">
+                <button class="copy-button" data-copy="sheet2-all" type="button">复制全部</button>
+                <button class="copy-button" data-copy="sheet2-body" type="button">复制去表头</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="sheet2Table"></table>
+            </div>
+          </div>
+
+          <div class="preview-card">
+            <div class="preview-heading">
+              <div>
+                <span class="label">Sheet 3</span>
+                <strong>结算整理表</strong>
+              </div>
+              <div class="preview-actions">
+                <button class="copy-button" data-copy="sheet3-all" type="button">复制全部</button>
+                <button class="copy-button" data-copy="sheet3-body" type="button">复制去表头</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="sheet3Table"></table>
+            </div>
+          </div>
+        </section>
+
+        <p class="message" id="message" role="status"></p>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

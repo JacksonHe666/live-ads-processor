@@ -1,0 +1,15 @@
+__pycache__/
+.DS_Store
+build/
+dist/
+outputs/
+windows_build/
+*.spec.bak
+*.xlsx
+*.xlsm
+*.csv
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.zip
