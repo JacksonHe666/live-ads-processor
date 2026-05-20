@@ -1,4 +1,4 @@
-# GitHub 构建 Windows EXE
+# GitHub 构建 Windows 桌面 EXE
 
 应用名称：`直播投放处理器`
 
@@ -10,21 +10,13 @@
 4. 选择 `Build Windows EXE`。
 5. 点击 `Run workflow`。
 6. 构建完成后，在页面底部 `Artifacts` 下载：
-   - `直播投放处理器.exe`
-   - `直播投放处理器-windows.zip`
+   - `直播投放处理器-windows-desktop`
 
 ## Windows 用户如何使用
 
-1. 下载 `直播投放处理器.exe`。
-2. 双击运行。
-3. 程序会自动打开浏览器。
-4. 如果没有自动打开，复制控制台里的地址，例如：
-
-```text
-http://127.0.0.1:8765
-```
-
-关闭控制台窗口即可退出程序。
+1. 下载 artifact 并解压。
+2. 双击 `直播投放处理器-windows-版本号.exe`。
+3. 应用会直接打开独立窗口，不跳转浏览器。
 
 ## 构建说明
 
@@ -33,10 +25,12 @@ GitHub Actions 使用：
 - Windows runner
 - Python 3.12
 - PyInstaller
+- Electron
+- electron-builder
 - `live_ads_processor.spec`
 
-输出文件名固定为：
+输出文件名类似：
 
 ```text
-直播投放处理器.exe
+直播投放处理器-windows-2.1.0.exe
 ```

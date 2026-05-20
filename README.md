@@ -34,12 +34,12 @@ pip install -r requirements.txt
 - `数据汇总`：分类汇总，除零结果显示为 0
 - `结算整理表`：结算字段，不包含重复的 `* 2` 字段
 
-## Windows EXE
+## Windows 桌面版 EXE
 
-GitHub Actions 已配置 Windows 自动构建。上传到 GitHub 后，在 Actions 里运行 `Build Windows EXE`，即可下载：
+GitHub Actions 已配置 Windows 自动构建。上传到 GitHub 后，在 Actions 里运行 `Build Windows EXE`，即可下载独立桌面窗口版：
 
 ```text
-直播投放处理器.exe
+直播投放处理器-windows-版本号.exe
 ```
 
 详细步骤见：

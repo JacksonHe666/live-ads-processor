@@ -1,0 +1,41 @@
+{
+  "name": "live-ads-processor",
+  "version": "2.1.0",
+  "description": "直播投放处理器桌面版",
+  "main": "electron/main.js",
+  "private": true,
+  "scripts": {
+    "build:win": "electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.jacksonhe.liveadsprocessor",
+    "productName": "直播投放处理器",
+    "directories": {
+      "output": "electron-dist"
+    },
+    "files": [
+      "electron/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "dist/直播投放处理器后端.exe",
+        "to": "backend/直播投放处理器后端.exe"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "直播投放处理器-windows-${version}.${ext}"
+    }
+  }
+}

@@ -3,7 +3,7 @@
 from PyInstaller.utils.hooks import collect_submodules
 
 
-APP_NAME = "直播投放处理器"
+APP_NAME = "直播投放处理器后端"
 
 
 a = Analysis(
