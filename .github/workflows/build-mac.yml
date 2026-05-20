@@ -6,6 +6,8 @@ on:
     branches:
       - main
       - master
+    tags:
+      - "v*"
     paths:
       - "web_app.py"
       - "process_live_ads.py"
@@ -67,3 +69,16 @@ jobs:
           name: 直播投放处理器-mac-dmg
           path: release/*.dmg
           if-no-files-found: error
+
+      - name: Upload DMG to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: 直播投放处理器 ${{ github.ref_name }}
+          files: release/*.dmg
+          body: |
+            直播投放处理器桌面版 ${{ github.ref_name }}
+
+            - macOS：Apple Silicon 原生版，适合 M1/M2/M3/M4 等 M 系列芯片。
+            - Windows：请下载同一 Release 中的 windows exe 文件。
+            - 桌面版后端已改为目录式打包，减少启动等待。

@@ -36,7 +36,13 @@ pip install -r requirements.txt
 
 ## Windows 桌面版 EXE
 
-GitHub Actions 已配置 Windows 自动构建。上传到 GitHub 后，在 Actions 里运行 `Build Windows EXE`，即可下载独立桌面窗口版：
+推荐从 GitHub Release 下载正式版本：
+
+```text
+https://github.com/JacksonHe666/live-ads-processor/releases
+```
+
+Windows 用户下载：
 
 ```text
 直播投放处理器-windows-2.2.0.exe
@@ -50,7 +56,13 @@ GITHUB_WINDOWS_EXE.md
 
 ## macOS 桌面版 DMG
 
-GitHub Actions 已配置 macOS 自动构建。在 Actions 里运行 `Build macOS DMG`，即可下载：
+推荐从 GitHub Release 下载正式版本：
+
+```text
+https://github.com/JacksonHe666/live-ads-processor/releases
+```
+
+M 系列 Mac 用户下载：
 
 ```text
 直播投放处理器-mac-arm64-2.2.0.dmg
@@ -61,3 +73,7 @@ GitHub Actions 已配置 macOS 自动构建。在 Actions 里运行 `Build macOS
 ## 桌面版启动优化
 
 桌面版后端使用目录式打包，减少每次启动时的解压等待。Windows 和 macOS 构建都会使用同一套优化后的后端结构。
+
+## 发布说明
+
+仓库公开后，其他人可以直接访问 Release 页面下载 Windows 和 macOS 两个版本。推送 `v*` 标签时，GitHub Actions 会自动构建并把安装包上传到对应 Release。

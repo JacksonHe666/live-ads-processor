@@ -6,6 +6,8 @@ on:
     branches:
       - main
       - master
+    tags:
+      - "v*"
     paths:
       - "web_app.py"
       - "process_live_ads.py"
@@ -75,3 +77,16 @@ jobs:
           path: |
             release/*.exe
           if-no-files-found: error
+
+      - name: Upload EXE to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: 直播投放处理器 ${{ github.ref_name }}
+          files: release/*.exe
+          body: |
+            直播投放处理器桌面版 ${{ github.ref_name }}
+
+            - Windows：下载 exe 后双击运行。
+            - macOS：请下载同一 Release 中的 mac-arm64 dmg 文件。
+            - 桌面版后端已改为目录式打包，减少启动等待。
